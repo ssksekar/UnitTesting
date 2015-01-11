@@ -1,12 +1,8 @@
 //$Id$
 package enumanalysis;
 
-import org.json.JSONArray;
-
-import com.adventnet.crm.entity.util.CrmModuleConstants;
 import com.adventnet.crm.integration.emails.util.ZMailConstants;
 import com.adventnet.crm.integration.emails.util.ZMailConstants.CRM_EMAIL_MODULES;
-import com.adventnet.crm.integration.search.util.CrmLuceneSearchUtil;
 
 public class EnumCrmEmailAnalysis {
 
@@ -17,7 +13,6 @@ public class EnumCrmEmailAnalysis {
 		{
 			switch ( CRM_EMAIL_MODULES.valueOf( module ) )
 			{
-			case Users:
 			case Potentials:
 			case UnMatched:
 				System.out.println(module);

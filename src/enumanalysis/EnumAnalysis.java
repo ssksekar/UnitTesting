@@ -24,7 +24,7 @@ public class EnumAnalysis {
 		
 		
 		String INTEGER = "DATE";
-		Long date = (Long) CAST_MYSQL_DATATYPE_TO_JAVA_DATATYPE.valueOf("BIGINT").cast("");
+		Long date = (Long) CAST_MYSQL_DATATYPE_TO_JAVA_DATATYPE.valueOf("BIGINT").cast(null);
 		System.out.println( date );
 		//System.out.println( EMAIL_DEFAULT_VIEWS.getDisplayName("ADDRESSED_TO_ME_OR_FROM_MY_ENTITIES") );
 	}	
@@ -136,7 +136,7 @@ enum CAST_MYSQL_DATATYPE_TO_JAVA_DATATYPE
 		public Long cast( String str ) 
 		{ 
 			Long val = null;
-			if ( str != null )
+			if ( str != null && str.trim().length() > 0 )
 			{
 				val = Long.valueOf( str );
 			}
@@ -236,7 +236,14 @@ enum CAST_MYSQL_DATATYPE_TO_JAVA_DATATYPE
 	
 	public Object cast( String str )
 	{
-		return null;
+		try{
+		}
+		catch(Exception ex)
+		{
+			
+		}
+		
+		return null;		
 	}
 	
 	private static Timestamp stringToTimestamp( String str ) 
