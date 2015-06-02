@@ -24,11 +24,20 @@ public class HashSetAnalysis {
 		hs.add("praba");
 		
 		System.out.println(hs);
-		System.out.println( CommonUtil.convertArrayListToCommaSepratedString( new ArrayList<String>(hs) ) );
+		//System.out.println( CommonUtil.convertArrayListToCommaSepratedString( new ArrayList<String>(hs) ) );
 		
+		HashSet<String> hs2 = new HashSet<String>(hs);
+		HashSet<String> hs3 = hs;
+		
+		hs3.add( "vithys" );
+		hs.add( "Mok" );
+		hs2.add( "har" );
+		
+		System.out.println(hs);
+		System.out.println(hs2);		
 		for(String s : hs)
 		{
-			System.out.println(s);
+			//System.out.println(s);
 		}
 	}
 }
