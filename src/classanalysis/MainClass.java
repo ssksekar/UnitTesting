@@ -1,7 +1,6 @@
 //$Id$
 package classanalysis;
 
-import encapsulationanalysis.ParentClass;
 
 public class MainClass {
 

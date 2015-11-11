@@ -7,27 +7,37 @@ import java.util.Map;
 
 public class HashMapAnalysis {
 
-	public static void main (String [] arg)
+	public static void main (String [] arg) throws Exception
 	{
-		LinkedHashMap<String, String> msgIds = new LinkedHashMap<String, String>();
-		msgIds.put("name", "sathish");
-		msgIds.put("office", "zoho");
-
-		//String m = msgIds.toString();
-		System.out.println( msgIds );
-		System.out.println( msgIds.get("name") );
-		System.out.println( msgIds.get("name2") );
+		HashMap<String, Long> hm = new HashMap<String, Long>(){
+			
+			public Long put( String key, Long value )
+			{
+				if ( this.containsKey(key) && this.get( key ) < value )
+				{
+					return super.put(key.toLowerCase(), value);
+				}
+				else if ( !this.containsKey(key) )
+				{
+					return super.put(key.toLowerCase(), value);
+				}
+				else
+				{
+					return null;
+				}
+			}
+		};
 		
+		hm.put("sathish", 35l);
+		hm.put("sathish", 10l);
+		hm.put("sathish", 20l);
+		hm.put("ssksekar", 20l);
+		hm.put("ssksekar", 20l);
+		hm.put("ssksekar", 40l);
+		hm.put("sathish", 36l);
 		
-		HashMap<String, Long> a1 = new HashMap<String, Long>();
-		HashMap<String, Long> a2 = null;
+		System.out.println( hm );
 		
-		System.out.println(a1);
-		a1.putAll(a2);
-		System.out.println(a1);
-		
-		HashMap<? extends Object,? extends Object> hms = new HashMap<Long, Long>();
-		hms.put(1111l, 2222l);
 	}
 	
 	

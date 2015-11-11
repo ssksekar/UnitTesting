@@ -2,6 +2,7 @@
 package collections;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 
 import com.adventnet.crm.common.util.CommonUtil;
@@ -39,5 +40,32 @@ public class HashSetAnalysis {
 		{
 			//System.out.println(s);
 		}
+		
+		
+		HashSet<Long> entityIdSet = new HashSet<Long>(){
+			public boolean addAll(Collection<? extends Long> c) {
+				if ( c != null )
+		        {
+					return super.addAll(c);
+		        }
+				
+				return false;
+		    }
+			
+			public boolean add(Long c) {
+				if ( c != null )
+		        {
+					System.out.println("coming here ::: " + c);
+					return super.add(c);
+		        }
+				
+				return false;
+		    }
+		};
+		
+		entityIdSet.add(1111l);
+		entityIdSet.addAll( new ArrayList<Long>(){{add(2222l);add(1111l);}} );
+		
+		System.out.println( entityIdSet );
 	}
 }

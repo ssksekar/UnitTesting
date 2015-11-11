@@ -10,7 +10,7 @@ import com.adventnet.crm.integration.util.IntegrationUtil;
 
 public class CallMailAPI {
 
-	public static final HashMap<String, String> authentication = new HashMap<String, String>(){{ put( PMDConstants.TICKET, "d6989fa871256523b01039f9d1a00dec" ); }};
+	public static final HashMap<String, String> authentication = new HashMap<String, String>(){{ put( PMDConstants.TICKET, "6eddf793c73e77ee5ce3b21da3e5c0a1" ); }};
 	public static final HashMap<String, String> authenticationISC = new HashMap<String, String>(){{ put( PMDConstants.ISC_TICKET, "7b39e79275afff340e07b9257b2497fa" );put( PMDConstants.ISC_ZUID, "533299" );put( PMDConstants.ISC_SCOPE, "crmmailapi" ); }};
 	public static final String localUrl = "https://zmail.localzoho.com/mail/MailAPI";
 	public static final String myLapUrl = "http://mail-fedora13-1.csez.zohocorpin.com:8080/mail/MailAPI";
@@ -100,10 +100,10 @@ public class CallMailAPI {
 		
 		postParam.put("emailid", "sathishkumar.sekar@zohocorp.com");
 		postParam.put("action", "sendMail");
-		postParam.put("toAddress", "ssk.localzoho@gmail.com");
-		postParam.put("fromAddress", "sathishkumar.sekar@zohocorp.com");
+		postParam.put("toAddress", "ssk.csez@gmail.com");
+		postParam.put("fromAddress", "sales@zoho.com");
 		//postParam.put("fromAddress", "sales@zoho.com");
-		postParam.put("subject", "11111");
+		postParam.put("subject", "22222");
 		postParam.put("mailFormat", "1");
 		postParam.put("encoding", "UTF-8");
 //		postParam.put("content", "UTC – The World's Time Standard..");
