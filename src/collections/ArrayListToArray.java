@@ -3,13 +3,13 @@ package collections;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.List;
 
 public class ArrayListToArray {
 
 	public static void main(String [] arg)
 	{
-		LinkedList<Long> al = new LinkedList<Long>();
+		List<Long> al = new ArrayList<Long>();
 		al.add( 111111l );
 		al.add( 2222222l );
 		al.add( 3333333l );
@@ -33,7 +33,7 @@ public class ArrayListToArray {
 		}
 		
 		System.out.println(al);
-		System.out.println(al.toArray( new Long[ al.size() ] ) [0] );
+		System.out.println(al.toArray( new String[ al.size() ] ) [0] );
 		
 	}
 	

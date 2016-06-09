@@ -10,7 +10,7 @@ public class RunTimeAnalysis {
 	public static void main(String arg []) throws Exception
 	{
 		Runtime rt = Runtime.getRuntime();
-        Process proc = rt.exec("javac");
+        Process proc = rt.exec("jar");
         InputStream stderr = proc.getErrorStream();
         InputStreamReader isr = new InputStreamReader(stderr);
         BufferedReader br = new BufferedReader(isr);

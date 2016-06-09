@@ -6,16 +6,17 @@ public class LongCamparsion {
 	public static void main(String [] arg)
 	{
 		Long l = 2000001852018520l;
-		Long l1 = null;
+		Long l1 = 2000001852018511l;
 		
-		if ( l == l1 )
+
+		if ( l > l1 )
 		{
-			System.out.println( "====" );
+			System.out.println( "l greater than l1 " );
 		}
 
-		if ( l.equals(l1 ) )
+		if ( l < l1 )
 		{
-			System.out.println( "EQUALS" );
+			System.out.println( "l lesser than l1 " );
 		}
 	}
 

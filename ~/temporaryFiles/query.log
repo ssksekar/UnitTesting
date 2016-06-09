@@ -1,0 +1,4 @@
+insert into detailView values ( 468939000000368001, 0, 922, 6, 1, 187, 8, 5, 6, 352, 24, 346, 0, b1c2420443b5712e3ab4a8f9af2712a3, 9743eff010840952cc7247e897ca74ac, DFS, true );
+insert into detailView values ( 468939000000368001, 0, 140, 3, 1, 49, 7, 3, 9, 93, 26, 89, 0, e4fef2fd6c3ed3462a35210f822dcb66, 1e3d0709807e55d56a42986f940b4580, DFS, true );
+insert into detailView values ( 468939000000368001, 0, 922, 6, 1, 187, 8, 5, 6, 352, 24, 346, 0, b1c2420443b5712e3ab4a8f9af2712a3, 9743eff010840952cc7247e897ca74ac, DFS, true );
+insert into detailView values ( 468939000000368001, 0, 140, 3, 1, 49, 7, 3, 9, 93, 26, 89, 0, e4fef2fd6c3ed3462a35210f822dcb66, 1e3d0709807e55d56a42986f940b4580, DFS, true );

@@ -8,7 +8,7 @@ public class mainClass {
     public static void main(String[] args) throws Exception {
         
         System.out.println("Loading Cricket and going to creat a Proxy object");
-        cricket game = (cricket) createProxyObject("com.zoho.reflection.proxy.india");
+        cricket game = (cricket) createProxyObject("reflection.proxy.india");
         System.out.println("Calling a getPlayerState method for dravid");
         String playerState = game.getPlayerState("dada");
         System.out.println("finally Player State = " + playerState);        
@@ -28,7 +28,7 @@ public class mainClass {
         Class [] interfacesList = dynamicObject.getClass().getInterfaces();
         
         /* define a proxy class that should be executed and create an object for that proxy class */
-        isHeCricketer ourProxyObject = (isHeCricketer) Class.forName("com.zoho.reflection.proxy.isHeCricketer").newInstance();
+        isHeCricketer ourProxyObject = (isHeCricketer) Class.forName("reflection.proxy.isHeCricketer").newInstance();
         
         /* set dynamicClassobject in our proxy class, then only it will know the class that needs to be called */
         ourProxyObject.setProxyObject(dynamicObject);

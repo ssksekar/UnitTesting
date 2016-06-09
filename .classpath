@@ -207,5 +207,6 @@
 	<classpathentry kind="lib" path="/Users/sathish-1343/classes/lib/tomcat-juli.jar"/>
 	<classpathentry kind="lib" path="/Users/sathish-1343/classes/lib/useragent-utils.jar"/>
 	<classpathentry kind="lib" path="/Users/sathish-1343/classes/lib/xalan-2.6.0.jar"/>
+	<classpathentry kind="lib" path="/Users/sathish-1343/classes/lib/jamm-0.2.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
