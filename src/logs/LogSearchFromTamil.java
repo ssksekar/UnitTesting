@@ -34,10 +34,9 @@ public class LogSearch {
 
 		try
 		{
-			
 			int fromDate = 8;
 			int toDate = 9;
-			int month = 3;
+			int month = 7;
 			String searchQuery = "logtype=\"application\" AND message CONTAINS \"mail.recentflag\" AND group_name=\"IMAPConsumer\"";
 
 			//Parse pattern

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ROOT"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/sathish-1343/classes/lib/ZohoCRM.jar"/>
 	<classpathentry kind="lib" path="/Users/sathish-1343/classes/lib/ZohoCRMJsp.jar"/>
 	<classpathentry kind="lib" path="/Users/sathish-1343/classes/lib/ZohoCRMTables.jar"/>
@@ -208,5 +206,6 @@
 	<classpathentry kind="lib" path="/Users/sathish-1343/classes/lib/useragent-utils.jar"/>
 	<classpathentry kind="lib" path="/Users/sathish-1343/classes/lib/xalan-2.6.0.jar"/>
 	<classpathentry kind="lib" path="/Users/sathish-1343/classes/lib/jamm-0.2.5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
