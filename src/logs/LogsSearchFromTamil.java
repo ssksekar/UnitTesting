@@ -25,7 +25,7 @@ import org.json.JSONObject;
  * @author tamil-1221
  *
  */
-public class LogSearch {
+public class LogsSearchFromTamil {
 
 	/**
 	 * @param args
@@ -34,8 +34,8 @@ public class LogSearch {
 
 		try
 		{
-			int fromDate = 8;
-			int toDate = 9;
+			int fromDate = 28;
+			int toDate = 29;
 			int month = 7;
 			String searchQuery = "logtype=\"application\" AND message CONTAINS \"mail.recentflag\" AND group_name=\"IMAPConsumer\"";
 

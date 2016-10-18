@@ -5,12 +5,12 @@ package mysql;
 public class Insert {
 
 	private static int count = 200000;
-	private static int startingCount = 1000000;
+	private static int startingCount = 0;
 
 	public static void main( String [] arg ) throws Exception
 	{
 		//initTemplateTable( false );
-		initTemplateTable( true );
+		initTemplateTable( false );
 	}
 	
 	private static void initTemplateTable( boolean isOrgTable )
@@ -32,7 +32,7 @@ public class Insert {
 			}
 			else
 			{
-				insertTemplateTable.tableName = "CrmTPL_MailClient";
+				insertTemplateTable.tableName = "CrmTPL_MailClient_1M";
 				insertTemplateTable.column = "LAST_MESSAGE_ID";
 			}
 			

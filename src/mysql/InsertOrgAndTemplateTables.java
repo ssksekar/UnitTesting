@@ -42,7 +42,7 @@ public class InsertOrgAndTemplateTables implements Runnable{
 			
 
 			/* Local mysql */
-			con = DriverManager.getConnection( "jdbc:mysql://localhost/sathish", "root", "" );
+			con = DriverManager.getConnection( "jdbc:mysql://localhost/CrmMailTesting", "root", "" );
 			
 			/* IDC mysql */
 			//con = DriverManager.getConnection( "jdbc:mysql://localhost/sathish", "root", "qazwsx" );

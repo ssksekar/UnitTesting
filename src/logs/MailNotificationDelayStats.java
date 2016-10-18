@@ -1,12 +1,6 @@
 //$Id$
 package logs;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,31 +9,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mysql.jdbc.Driver;
 
-public class MailNotificationDelayStats {
+public class MailNotificationDelayStats implements Runnable{
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
+	public static void main(String arg [])
+	{
+		for ( int i = 0; i < 24; i++ )
+		{
+			Thread t = new Thread( new MailNotificationDelayStats() );
+			t.setName( String.valueOf(i) );
+			t.start();
+		}
+	}
+	
+	public void run() 
+	{
 		try
 		{
-			int fromDate = 28;
-			int toDate = 28;
+			int fromDate = 29;
+			int toDate = 29;
 			int month = 7;
 			String searchQuery = "logtype=\"application\" and group_name CONTAINS \"IMAPConsumer\" and class_name CONTAINS \"MailClientNotificationHandler\" and method CONTAINS \"logTime\" and message CONTAINS \"Incoming Mail LogTime ::: UserId :::\"";
+			int threadName = Integer.valueOf( Thread.currentThread().getName() );
 
 			for (int dateIdx = fromDate; dateIdx <= toDate; dateIdx++)
 			{
@@ -59,11 +54,14 @@ public class MailNotificationDelayStats {
 					
 					al = new ArrayList<HashMap<String,String>>();
 					
-					JSONObject jobj = getLogs("application", "2016-"+month+"-"+dateIdx, start, end, "&query="+ encode(searchQuery),true);
+					String startTime = threadName + ":00";
+					String endTime = threadName + ":59";
+					
+					JSONObject jobj = LogsUtil.getLogs("application", dateIdx+"/"+month+"/2016 " + startTime, dateIdx+"/"+month+"/2016 " + endTime, start, end, "&query="+ encode(searchQuery),true);
 					JSONArray docs = jobj.getJSONArray("docs");
 
 					docsSize = docs.length();
-					System.out.println("Received Size ::: " + docsSize);
+					System.out.println( threadName + " ::: Received Size ::: " + docsSize);
 					//System.out.println(jobj);
 					
 					for (int i = 0; i < docsSize; i++) 
@@ -84,11 +82,11 @@ public class MailNotificationDelayStats {
 						al.add(hm);
 					}
 					
-					insert(al);
+					insert(al, threadName);
 					page++;
 				}
 				
-				System.out.println("Completed");
+				System.out.println( threadName + " ::: Completed" );
 			}
 
 		}
@@ -105,93 +103,27 @@ public class MailNotificationDelayStats {
 
 	public static int getCount(String type, String date, String searchString) throws Exception
 	{
-		JSONObject logsResult = getLogs(type, date, 1, 1, searchString, false);
+		JSONObject logsResult = LogsUtil.getLogs(type, date+ " 00:00", date + " 23:59", 1, 1, searchString, false);
 		int count = logsResult.getInt("numFound");
 		return count;
 	}
 
-	public static JSONObject getLogs(String type, String date, int fromIndex, int toIndex, String searchQuery, boolean isAscending) throws Exception
-	{
-		/** SSL Start **/
-
-		// Create a trust manager that does not validate certificate chains
-		TrustManager[] trustAllCerts = new TrustManager[]{
-				new X509TrustManager() {
-					public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-						return null;
-					}
-					public void checkClientTrusted(
-							java.security.cert.X509Certificate[] certs, String authType) {
-					}
-					public void checkServerTrusted(
-							java.security.cert.X509Certificate[] certs, String authType) {
-					}
-				}
-		};
-
-
-		// Install the all-trusting trust manager
-		SSLContext sc = SSLContext.getInstance("SSL");
-
-		sc.init(null, trustAllCerts, new java.security.SecureRandom());
-
-		HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-
-
-		// Create all-trusting host name verifier
-
-		HostnameVerifier allHostsValid = new HostnameVerifier() {
-
-			public boolean verify(String hostname, SSLSession session) {
-
-				return true;
-
-			}
-
-		};
-
-		HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
-
-		/** SSL End **/
-
-		//URL logServer = new URL("https://logs.zoho.com/search?appid=36064526&service=crm&type="+type+"&date="+date+"&fromTime=00:01&toTime=23:59&range="+fromIndex+"-"+toIndex+"&authtoken=d834d4ad3d4a5bfcdf2cab8f31cd5482&"+searchQuery);
-		String url = "https://logs.zoho.com/search?appid=36064526&service=crm&type="+type+"&date="+date+"&range="+fromIndex+"-"+toIndex+"&authtoken=d834d4ad3d4a5bfcdf2cab8f31cd5482&";
-		url = isAscending ? url + "order=asc&" : url;
-		url += searchQuery;
-		
-		URL logServer = new URL(url);
-		
-		URLConnection yc = logServer.openConnection();
-		yc.setDoInput(true); 
-		yc.setDoOutput(true);
-
-		BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
-		String inputLine;
-		StringBuilder sbuff = new StringBuilder();
-		while ((inputLine = in.readLine()) != null)
-		{
-			sbuff.append(inputLine); 
-		}
-		JSONObject jobj = new JSONObject(sbuff.toString());
-
-		return jobj;
-	}
-
+	
 	private static String encode(String data) throws UnsupportedEncodingException
 	{
 		return URLEncoder.encode(data, "UTF-8");
 	}
 	
-	private static void insert(ArrayList<HashMap<String, String>> insertionData) throws Exception
+	private static void insert( ArrayList<HashMap<String, String>> insertionData, int threadName ) throws Exception
 	{
-		System.out.println( "Insertion Size ::: " + insertionData.size() );
+		System.out.println( threadName + " ::: Insertion Size ::: " + insertionData.size() );
 		//System.out.println( "Insertion Size ::: " + insertionData );
 		Connection con = null;
 		try
 		{
 			Class.forName( Driver.class.getName() );		
 			
-			String insertSql = "insert into MailNotificationDelay (UserId, CrmMailUid, FolderType, CurrentTime, MailReceivedTime, Difference) values ( ?, ?, ?, ?, ?, ? )";
+			String insertSql = "insert into MailDelay29_1 (UserId, CrmMailUid, FolderType, CurrentTime, MailReceivedTime, Difference) values ( ?, ?, ?, ?, ?, ? )";
 
 			/* Local mysql */
 			con = DriverManager.getConnection( "jdbc:mysql://localhost/sathish", "root", "" );
@@ -233,4 +165,3 @@ public class MailNotificationDelayStats {
 		}
 	}
 }
-
