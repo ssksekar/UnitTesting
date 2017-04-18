@@ -17,7 +17,7 @@ import org.json.JSONObject;
 
 public class LogsUtil {
 
-	public static JSONObject getLogs(String type, String fromDateTime, String toDateTime, int fromIndex, int toIndex, String searchQuery, boolean isAscending) throws Exception
+	public static JSONObject getLogs(String fromDateTime, String toDateTime, int fromIndex, int toIndex, String searchQuery, boolean isAscending) throws Exception
 	{
 		/** SSL Start **/
 
@@ -66,7 +66,7 @@ public class LogsUtil {
 		url = isAscending ? url + "&order=asc" : url;
 		url += "&" + searchQuery;
 		
-		//System.out.println( url );
+		System.out.println( url );
 		
 		URL logServer = new URL(url);
 		

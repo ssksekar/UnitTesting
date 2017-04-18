@@ -21,7 +21,7 @@ public class MainClass {
 		System.out.println( c.getClass() == ChildClass.class );
 		
 		ConstructorAnalysis  cs = new ConstructorAnalysis("indian");
-		
+	Thread.sleep(100l);	
 	}
 	
 	class InnerClass
